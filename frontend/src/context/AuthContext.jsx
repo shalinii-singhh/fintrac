@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   axios.defaults.withCredentials = true;
-  axios.defaults.baseURL = import.meta.env.MODE === 'production' ? '/api' : 'http://localhost:5000/api';
+  axios.defaults.baseURL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '/api' : 'http://localhost:5000/api');
 
   useEffect(() => {
     checkUser();
