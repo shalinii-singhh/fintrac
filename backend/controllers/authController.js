@@ -7,8 +7,8 @@ const generateToken = (res, userId) => {
   });
   res.cookie('jwt', token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV !== 'development',
-    sameSite: 'strict',
+    secure: true, // required for cross-site cookies
+    sameSite: 'none', // required for cross-site cookies
     maxAge: 30 * 24 * 60 * 60 * 1000,
   });
 };
@@ -60,6 +60,8 @@ const logoutUser = (req, res) => {
   res.cookie('jwt', '', {
     httpOnly: true,
     expires: new Date(0),
+    secure: true,
+    sameSite: 'none',
   });
   res.status(200).json({ message: 'Logged out successfully' });
 };
