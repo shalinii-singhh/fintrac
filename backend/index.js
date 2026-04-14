@@ -21,14 +21,7 @@ app.use(cookieParser());
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/transactions', require('./routes/transactionRoutes'));
 
-// Serve Frontend in Production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-  // Catch-all route to serve index.html for React Router
-  app.use((req, res) => res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html')));
-} else {
-  app.get('/', (req, res) => res.send('API running in development...'));
-}
+app.get('/', (req, res) => res.send('Fintrac API running...'));
 
 const PORT = process.env.PORT || 5000;
 
